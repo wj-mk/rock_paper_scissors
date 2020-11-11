@@ -17,9 +17,8 @@
     }
 
     // function playerSelection that asks player to select rock, paper or scissors
-        // make function case insensitive
     function playerSelection() {
-        let selection = prompt("Rock, paper, scissors?")
+        selection = prompt("Rock, paper, scissors?")
 
         return selection.toLowerCase()
     }
@@ -28,6 +27,58 @@
         // calls computerPlay
         // calls playerSelection
         // return sting that declares the winner
-    
+    function playRound() {
+        comp = computerPlay()
+        play = playerSelection()
+        
+        let result = ""
+
+        switch (comp) {
+            case 'rock':
+                switch (play) {
+                    case 'rock':
+                        result = "Rock v Rock. Tie.";
+                        break;
+                    case 'paper':
+                        result = "Paper crushes Rock. You win!";
+                        break;
+                    case 'scissors':
+                        result = "Rock blunts Scissors. You lose!";
+                        break;
+                }
+                break;
+            case 'paper':
+                switch (play) {
+                        case 'rock':
+                            result = "Paper crushes Rock. You lose!";
+                            break;
+                        case 'paper':
+                            result = "Paper v Paper. Tie.";
+                            break;
+                        case 'scissors':
+                            result = "Scissors cuts Paper. You win!";
+                            break;
+                    }
+                break;
+            case 'scissors':
+                switch (play) {
+                        case 'rock':
+                            result = "Rock blunts Scissors. You win!";
+                            break;
+                        case 'paper':
+                            result = "Scissors cuts Paper. You lose!";
+                            break;
+                        case 'scissors':
+                            result = "Scissor v Scissors. You lose!";
+                            break;
+                    }
+                break;
+        }
+
+        return result
+    }
+
+    result = playRound()
+    console.log(result)
     // function game() that plays 5 rounds, and keeps the score and reports the winner or loser at the end.
 </script>
