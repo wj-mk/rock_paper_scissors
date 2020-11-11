@@ -1,3 +1,31 @@
 <script>
+    // function computerPlay randomly returns rock, paper or scissors
+    function computerPlay(){
+        randomNumber = Math.random()
+
+        if (randomNumber < 0.333) {
+            choice = 'rock';
+        }
+        else if (randomNumber > 0.333 &&  randomNumber < 0.667) {
+            choice = 'paper';
+        }
+        else if (randomNumber > 0.667) {
+            choice = 'scissors';
+        }
+
+        return choice
+    }
+
+    result = computerPlay()
+    console.log(result)
+    // function playerSelection that asks player to select rock, paper or scissors
+        // make function case insensitive
+
+
+    // function playRound that plays a round of rock, paper, scissors
+        // calls computerPlay
+        // calls playerSelection
+        // return sting that declares the winner
     
+    // function game() that plays 5 rounds, and keeps the score and reports the winner or loser at the end.
 </script>
