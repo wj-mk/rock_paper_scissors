@@ -16,12 +16,14 @@
         return choice
     }
 
-    result = computerPlay()
-    console.log(result)
     // function playerSelection that asks player to select rock, paper or scissors
         // make function case insensitive
+    function playerSelection() {
+        let selection = prompt("Rock, paper, scissors?")
 
-
+        return selection.toLowerCase()
+    }
+    
     // function playRound that plays a round of rock, paper, scissors
         // calls computerPlay
         // calls playerSelection
