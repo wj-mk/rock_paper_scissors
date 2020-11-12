@@ -24,52 +24,45 @@
     }
     
     // function playRound that plays a round of rock, paper, scissors
-        // calls computerPlay
-        // calls playerSelection
-        // return sting that declares the winner
-    function playRound() {
-        comp = computerPlay()
-        play = playerSelection()
-        
-        let result = ""
-
-        switch (comp) {
+    // returns if player wins or looses
+    function playRound(computerPlay, playerSelection) {
+        switch (computerPlay) {
             case 'rock':
-                switch (play) {
+                switch (playerSelection) {
                     case 'rock':
-                        result = "Rock v Rock. Tie.";
+                        result = "Tie. Rock v Rock.";
                         break;
                     case 'paper':
-                        result = "Paper crushes Rock. You win!";
+                        result = "You win! Paper crushes Rock.";
                         break;
                     case 'scissors':
-                        result = "Rock blunts Scissors. You lose!";
+                        result = "You lose! Rock blunts Scissors.";
                         break;
                 }
                 break;
             case 'paper':
-                switch (play) {
+                switch (playerSelection) {
                         case 'rock':
-                            result = "Paper crushes Rock. You lose!";
+                            result = "You lose! Paper crushes Rock.";
                             break;
                         case 'paper':
-                            result = "Paper v Paper. Tie.";
+                            result = "Tie. Paper v Paper.";
                             break;
                         case 'scissors':
-                            result = "Scissors cuts Paper. You win!";
+                            result = "You win! Scissors cuts Paper.";
                             break;
                     }
                 break;
             case 'scissors':
-                switch (play) {
+                switch (playerSelection) {
                         case 'rock':
-                            result = "Rock blunts Scissors. You win!";
+                            result = "You win! Rock blunts Scissors.";
                             break;
                         case 'paper':
-                            result = "Scissors cuts Paper. You lose!";
+                            result = "You lose! Scissors cuts Paper.";
                             break;
                         case 'scissors':
-                            result = "Scissor v Scissors. You lose!";
+                            result = "Tie. Scissor v Scissors.";
                             break;
                     }
                 break;
@@ -78,7 +71,35 @@
         return result
     }
 
-    result = playRound()
-    console.log(result)
     // function game() that plays 5 rounds, and keeps the score and reports the winner or loser at the end.
+
+    function game() {
+        playerScore = 0;
+        computerScore = 0;
+
+        while (playerScore < 5 && computerScore < 5) {
+            let player =  playerSelection();
+            let computer = computerPlay();
+            round = playRound(computer, player);
+
+            if (round.startsWith("You win!")) {
+                playerScore += 1;
+            }
+            else if (round.startsWith("You lose!")) {
+                computerScore += 1;
+            }
+
+            console.log(round)
+            console.log(`Player Score: ${playerScore}, Computer Score: ${computerScore}.`)
+        }
+
+        if (playerScore == 5) {
+            console.log("You have won the game!")
+        }
+        else if (computerScore == 5) {
+            console.log("You have lost the game!")
+        }
+    }
+
+    game()
 </script>
