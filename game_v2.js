@@ -1,14 +1,24 @@
-// listen for button press from user
-buttons.addEventListener('click', function (e) {
-    playerSelection = e.target.id;
-    console.log(playerSelection);
-    
-});
+let pScore, cScore;
+pScore = cScore = 0;
+let inResult = ''
+roundNumber = 0;
 
-    // function computerPlay randomly returns rock, paper or scissors
+const results = document.querySelector('#results')
+
+const rounds = document.createElement('p');
+results.appendChild(rounds);
+rounds.textContent = `Round ${roundNumber} of 5.`;
+
+/*const outResult = document.createElement('p');
+results.appendChild(outResult);
+
+/*const scores = document.createElement('p');
+results.appendChild(scores);
+scores.textContent = `Player's Score: ${pScore}. Computer's Score: ${cScore}.`;*/
+
+// function computerPlay randomly returns rock, paper or scissors
 function computerPlay(){
     randomNumber = Math.random()
-
     if (randomNumber < 0.333) {
         choice = 'rock';
     }
@@ -18,10 +28,8 @@ function computerPlay(){
     else if (randomNumber > 0.667) {
         choice = 'scissors';
     }
-
     return choice
 }
-
 
 // function playRound that plays a round of rock, paper, scissors
 // returns if player wins or looses
@@ -67,9 +75,33 @@ function playRound(computerPlay, playerSelection) {
                 }
             break;
     }
-
     return result
 }
+
+
+
+// listen for button press from user
+buttons.addEventListener('click', function (e) {
+    pSelect = e.target.id;
+    cSelect = computerPlay();
+    roundResult = playRound(cSelect, pSelect);
+    console.log(roundResult);
+    ++roundNumber;
+    rounds.textContent = `Round ${roundNumber} of 5.`;
+    if (roundNumber > 5) {
+        roundNumber = 1;
+        rounds.textContent = `Round ${roundNumber} of 5.`;
+    }
+})
+
+
+
+
+
+
+
+
+
 
 // function game() that plays 5 rounds, and keeps the score and reports the winner or loser at the end.
 
@@ -82,15 +114,7 @@ function game() {
         let computer = computerPlay();
         round = playRound(computer, player);
 
-        if (round.startsWith("You win!")) {
-            playerScore += 1;
-        }
-        else if (round.startsWith("You lose!")) {
-            computerScore += 1;
-        }
-
-        console.log(round)
-        console.log(`Player Score: ${playerScore}, Computer Score: ${computerScore}.`)
+        
     }
 
     if (playerScore == 5) {
@@ -98,7 +122,7 @@ function game() {
     }
     else if (computerScore == 5) {
         console.log("You have lost the game!")
-    }
+    }   
 }
 
 
