@@ -73,4 +73,3 @@ buttons.addEventListener('click', function(e) {
         roundNumber = playerScore = computerScore = 0;
     }
 })
-
