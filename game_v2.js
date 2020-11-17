@@ -1,24 +1,18 @@
-let pScore, cScore;
-pScore = cScore = 0;
-let inResult = ''
-roundNumber = 0;
+let playerSelection = '';
+let roundNumber, playerScore, computerScore;
+roundNumber = playerScore = computerScore = 0;
 
-const results = document.querySelector('#results')
+const results = document.querySelector('#results');
 
 const rounds = document.createElement('p');
-results.appendChild(rounds);
-rounds.textContent = `Round ${roundNumber} of 5.`;
 
-/*const outResult = document.createElement('p');
-results.appendChild(outResult);
+const roundResult = document.createElement('p');
 
-/*const scores = document.createElement('p');
-results.appendChild(scores);
-scores.textContent = `Player's Score: ${pScore}. Computer's Score: ${cScore}.`;*/
+const scores = document.createElement('p');
 
-// function computerPlay randomly returns rock, paper or scissors
-function computerPlay(){
+function computerChoose(){
     randomNumber = Math.random()
+
     if (randomNumber < 0.333) {
         choice = 'rock';
     }
@@ -28,101 +22,55 @@ function computerPlay(){
     else if (randomNumber > 0.667) {
         choice = 'scissors';
     }
-    return choice
-}
 
-// function playRound that plays a round of rock, paper, scissors
-// returns if player wins or looses
-function playRound(computerPlay, playerSelection) {
-    switch (computerPlay) {
-        case 'rock':
-            switch (playerSelection) {
-                case 'rock':
-                    result = "Tie. Rock v Rock.";
-                    break;
-                case 'paper':
-                    result = "You win! Paper crushes Rock.";
-                    break;
-                case 'scissors':
-                    result = "You lose! Rock blunts Scissors.";
-                    break;
-            }
-            break;
-        case 'paper':
-            switch (playerSelection) {
-                    case 'rock':
-                        result = "You lose! Paper crushes Rock.";
-                        break;
-                    case 'paper':
-                        result = "Tie. Paper v Paper.";
-                        break;
-                    case 'scissors':
-                        result = "You win! Scissors cuts Paper.";
-                        break;
-                }
-            break;
-        case 'scissors':
-            switch (playerSelection) {
-                    case 'rock':
-                        result = "You win! Rock blunts Scissors.";
-                        break;
-                    case 'paper':
-                        result = "You lose! Scissors cuts Paper.";
-                        break;
-                    case 'scissors':
-                        result = "Tie. Scissor v Scissors.";
-                        break;
-                }
-            break;
+    return choice;
+};
+
+function playRound(playerSelection) {
+    computerSelection = computerChoose();
+    if (computerSelection == playerSelection) {
+        return `Tie! ${computerSelection} and ${playerSelection}.`;
     }
-    return result
-}
-
-
+    else if (
+            (computerSelection == 'rock' && playerSelection == 'paper') || 
+            (computerSelection == 'paper' && playerSelection == 'scissors') || 
+            (computerSelection == 'scissors' && playerSelection == 'rock')
+            ) 
+            {
+                playerScore += 1;
+                return `You win! ${playerSelection} beats ${computerSelection}`;
+    }
+    else {
+            computerScore += 1;
+            return `You lose! ${computerSelection} beats ${playerSelection}`;
+    };
+};
 
 // listen for button press from user
-buttons.addEventListener('click', function (e) {
-    pSelect = e.target.id;
-    cSelect = computerPlay();
-    roundResult = playRound(cSelect, pSelect);
-    console.log(roundResult);
+buttons.addEventListener('click', function(e) {
+    playerSelection = e.target.id;
+    roundOutcome = playRound(playerSelection);
     ++roundNumber;
-    rounds.textContent = `Round ${roundNumber} of 5.`;
-    if (roundNumber > 5) {
-        roundNumber = 1;
-        rounds.textContent = `Round ${roundNumber} of 5.`;
+    console.log(`Completed ${roundNumber} of 5 rounds.`)
+    
+    rounds.textContent = `Completed ${roundNumber} of 5.`;
+    results.appendChild(rounds);
+    
+    roundResult.textContent = roundOutcome;
+    results.appendChild(roundResult);
+
+    scores.textContent = `Player's Score: ${playerScore}. Computer's Score: ${computerScore}.`;
+    results.appendChild(scores);
+
+    console.log(playerScore, computerScore);
+    if (roundNumber > 4) {
+        if (playerScore > computerScore) {
+            console.log("You have won the game!")
+        }
+        else {
+            console.log("You have lost the game! ")
+        }
+        roundNumber = playerScore = computerScore = 0;
     }
 })
-
-
-
-
-
-
-
-
-
-
-// function game() that plays 5 rounds, and keeps the score and reports the winner or loser at the end.
-
-function game() {
-    playerScore = 0;
-    computerScore = 0;
-
-    while (playerScore < 5 && computerScore < 5) {
-        let player =  playerSelection();
-        let computer = computerPlay();
-        round = playRound(computer, player);
-
-        
-    }
-
-    if (playerScore == 5) {
-        console.log("You have won the game!")
-    }
-    else if (computerScore == 5) {
-        console.log("You have lost the game!")
-    }   
-}
-
 
