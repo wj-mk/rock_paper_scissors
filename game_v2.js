@@ -23,8 +23,8 @@ function computerChoose(){
         choice = 'scissors';
     }
 
-    return choice
-}
+    return choice;
+};
 
 function playRound(playerSelection) {
     computerSelection = computerChoose();
@@ -63,7 +63,6 @@ buttons.addEventListener('click', function(e) {
     results.appendChild(scores);
 
     console.log(playerScore, computerScore);
-    //rounds.textContent = `Round ${roundNumber} of 5.`;
     if (roundNumber > 4) {
         if (playerScore > computerScore) {
             console.log("You have won the game!")
@@ -72,7 +71,6 @@ buttons.addEventListener('click', function(e) {
             console.log("You have lost the game! ")
         }
         roundNumber = playerScore = computerScore = 0;
-        //rounds.textContent = `Round ${roundNumber} of 5.`;
     }
 })
 
